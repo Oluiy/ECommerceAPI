@@ -1,5 +1,6 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;   // Needed for .ProjectTo<T>()
+using AutoMapper.QueryableExtensions;
+using EcommerceAPI.Cache; // Needed for .ProjectTo<T>()
 using ECommerceAPI.Data;
 using ECommerceAPI.DTOs;
 using ECommerceAPI.Models;
@@ -15,12 +16,14 @@ namespace ECommerceAPI.Controllers
         private readonly ECommerceDbContext _context;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly OrderCache _cache;
 
-        public OrdersController(ECommerceDbContext context, IMapper mapper, IConfiguration configuration)
+        public OrdersController(ECommerceDbContext context, IMapper mapper, IConfiguration configuration, OrderCache cache)
         {
             _context = context;
             _mapper = mapper;
             _configuration = configuration;
+            _cache = cache;
         }
 
         // Get an order by ID.
@@ -31,13 +34,16 @@ namespace ECommerceAPI.Controllers
         {
             try
             {
-                var orderDTO = await _context.Orders
-                    .AsNoTracking()
-                    .Where(o => o.Id == id)
-                    .ProjectTo<OrderDTO>(_mapper.ConfigurationProvider)
-                    .FirstOrDefaultAsync();
-                if (orderDTO == null) return NotFound($"Order with ID {id} not found.");
+                
+                // var orderDTO = await _context.Orders
+                //     .AsNoTracking()
+                //     .Where(o => o.Id == id)
+                //     .ProjectTo<OrderDTO>(_mapper.ConfigurationProvider)
+                //     .FirstOrDefaultAsync();
+                // if (orderDTO == null) return NotFound($"Order with ID {id} not found.");
                 // If found, return a 200 OK along with the mapped OrderDTO
+                var orderDTO = await _cache.GetOrdersAsync(id); // Cache Method Much More Faster.
+                // Console.WriteLine(Response);
                 return Ok(orderDTO);
             }
             catch (Exception ex)
@@ -51,12 +57,13 @@ namespace ECommerceAPI.Controllers
         {
             try
             {
-                // We filter by CustomerId, then project to OrderDTO and fetch the results
-                var ordersDTO = await _context.Orders
-                    .AsNoTracking()
-                    .Where(o => o.CustomerId == customerId)
-                    .ProjectTo<OrderDTO>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                // // We filter by CustomerId, then project to OrderDTO and fetch the results
+                // var ordersDTO = await _context.Orders
+                //     .AsNoTracking()
+                //     .Where(o => o.CustomerId == customerId)
+                //     .ProjectTo<OrderDTO>(_mapper.ConfigurationProvider)
+                //     .ToListAsync();
+                var ordersDTO = await _cache.GetOrdersByCustomersId(customerId);
                 // If there are no matching orders, return 404
                 if (!ordersDTO.Any())
                     return NotFound($"No orders found for customer with ID {customerId}.");

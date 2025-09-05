@@ -168,3 +168,4 @@
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/ref/EcommerceAPI.dll
 /Users/israel/RiderProjects/EcommerceAPI/bin/Debug/net9.0/AutoMapper.dll
 /Users/israel/RiderProjects/EcommerceAPI/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/EcommerceAPI.sourcelink.json

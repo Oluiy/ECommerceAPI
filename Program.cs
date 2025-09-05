@@ -1,3 +1,4 @@
+using EcommerceAPI.Cache;
 using ECommerceAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,9 @@ namespace EcommerceAPI
             //To register Dependency(In using DI<Dependency Injection>)
             // builder.Services.AddScoped<IPaymentService, PaymentService>()
             // RequestDelegate
+            
+            builder.Services.AddMemoryCache();
+            builder.Services.AddScoped<OrderCache>();
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -40,8 +44,10 @@ namespace EcommerceAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            //Configure the automapper
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            //Configure the automapper
+            
+            
             // builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Configure EF Core with SQL Server
