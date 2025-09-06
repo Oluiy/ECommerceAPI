@@ -1,10 +1,12 @@
 using AutoMapper;
+using EcommerceAPI.Cache;
 using ECommerceAPI.Data;
 using EcommerceAPI.DTOs;
 using EcommerceAPI.Middleware;
 using ECommerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace EcommerceAPI.Controllers
 {
@@ -14,11 +16,13 @@ namespace EcommerceAPI.Controllers
     {
         private readonly ECommerceDbContext _context;
         private readonly IMapper _mapper;
+        private readonly CustomerCache _cache;
 
-        public CustomersController(ECommerceDbContext context, IMapper mapper)
+        public CustomersController(ECommerceDbContext context, IMapper mapper, CustomerCache cache)
         {
             _context = context;
             _mapper = mapper;
+            _cache = cache;
         }
 
         // Register a new customer.
@@ -93,12 +97,12 @@ namespace EcommerceAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Customer>> GetCustomer([FromRoute] int id) // Default binding from route
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _cache.GetCustomers(id);
 
-            if (customer == null)
-            {
-                return NotFound();
-            }
+            // if (customer == null)
+            // {
+            //     return NotFound();
+            // }
 
             return Ok(customer);
         }

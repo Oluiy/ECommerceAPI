@@ -8,6 +8,7 @@ namespace ECommerceAPI.MappingProfiles
     {
         public OrderMappingProfile()
         {
+            CreateMap<Customer, Customer>();
             //-----------------------------------------------------------------
             // 1. Order -> OrderDTO
             //-----------------------------------------------------------------
