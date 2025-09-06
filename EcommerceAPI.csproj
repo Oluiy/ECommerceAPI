@@ -24,4 +24,8 @@
       <Folder Include="Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Library.cs" />
+    </ItemGroup>
+
 </Project>
