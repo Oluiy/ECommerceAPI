@@ -57,8 +57,6 @@ namespace EcommerceAPI.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-
-            
         }
 
         // Login a customer.
@@ -66,7 +64,7 @@ namespace EcommerceAPI.Controllers
         // Endpoint: POST /api/customers/login
         [HttpPost("login")]
         public async Task<IActionResult> Login(
-            [FromHeader(Name = "X-Client-ID")] string clientId, // Binding from header
+            [FromHeader(Name = "X-Client-ID")] string? clientId, // Binding from header
             [FromBody] CustomerLoginDTO loginDto) // Binding from body
         {
             // Check the custom header
@@ -74,7 +72,11 @@ namespace EcommerceAPI.Controllers
                 return BadRequest("Missing X-Client-ID header");
 
             var customer = await _context.Customers
-                .FirstOrDefaultAsync(c => c.Email == loginDto.Email && c.Password == loginDto.Password);
+                .FirstOrDefaultAsync(c => c.Email == loginDto.Email);
+            if (!PasswordCrypt.VerifyPasswordHash(loginDto.Password, customer.Password))
+                return Unauthorized("Invalid email or password.");
+            
+                    // && c.Password == loginDto.Password
 
             if (customer == null)
             {
