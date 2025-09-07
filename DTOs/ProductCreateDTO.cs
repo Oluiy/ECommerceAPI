@@ -8,13 +8,19 @@ namespace EcommerceAPI.DTOs
         public string Name { get; set; }
         public string? Description { get; set; }
 
-        [Required(ErrorMessage = "Product Category is required")]
-        public string Category { get; set; }
+        [Required(ErrorMessage = "Product CategoryId is required")]
+        public int CategoryId { get; set; }
 
         [Range(0.01, 100000, ErrorMessage = "Price must be between 0.01 and 100000")]
         public decimal Price { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Stock cannot be a Negative value")]
-        public int Stock { get; set; }
+        public int StockQuantity { get; set; }
+        
+        [Required(ErrorMessage = "DiscountPercentage is Required.")]
+        public decimal? DiscountPercentage { get; set; }
+        [MaxLength(50)]
+        public string SKU { get; set; } 
+        
     }
 }

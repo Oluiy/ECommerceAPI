@@ -35,6 +35,8 @@ namespace EcommerceAPI
             builder.Services.AddMemoryCache();
             builder.Services.AddScoped<OrderCache>();
             builder.Services.AddScoped<CustomerCache>();
+            builder.Services.AddScoped<ProductCache>();
+            
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
