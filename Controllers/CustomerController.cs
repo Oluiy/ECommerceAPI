@@ -4,9 +4,11 @@ using ECommerceAPI.Data;
 using EcommerceAPI.DTOs;
 using EcommerceAPI.Middleware;
 using ECommerceAPI.Models;
+using EcommerceAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
+// using Microsoft.Extensions.Caching.Memory;
 
 namespace EcommerceAPI.Controllers
 {
@@ -17,18 +19,26 @@ namespace EcommerceAPI.Controllers
         private readonly ECommerceDbContext _context;
         private readonly IMapper _mapper;
         private readonly CustomerCache _cache;
+        private readonly TokenService _tokenService;
+        private readonly IConfiguration _config;
 
-        public CustomersController(ECommerceDbContext context, IMapper mapper, CustomerCache cache)
+        public CustomersController(ECommerceDbContext context,
+            IMapper mapper, CustomerCache cache, 
+            TokenService tokenService, IConfiguration config
+            )
         {
             _context = context;
             _mapper = mapper;
             _cache = cache;
+            _tokenService = tokenService;
+            _config = config;
         }
-
+        
         // Register a new customer.
         // Demonstrates [FromForm].
         // Endpoint: POST /api/customers/register
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<ActionResult<CustomerRegistrationDTO>> RegisterCustomer([FromBody] CustomerRegistrationDTO registrationDto) // Binding from form data
         {
             // Check if email already exists
@@ -54,8 +64,15 @@ namespace EcommerceAPI.Controllers
 
                 _context.Customers.Add(customer);
                 await _context.SaveChangesAsync();
-                var registeredCustomer = _mapper.Map<Customer>(customer);
-                return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, registeredCustomer);
+                var token = _tokenService.CreateToken(customer.Id.ToString(), customer.Email);
+                var response = new
+                {
+                    Token = token,
+                    Expiring = int.Parse(_config["Jwt:ExpiryMinutes"] ?? "60"),
+                    registeredCustomer = _mapper.Map<Customer>(customer)
+                };
+                
+                return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, response);
             }
             catch (Exception ex)
             {
@@ -82,13 +99,21 @@ namespace EcommerceAPI.Controllers
             
                     // && c.Password == loginDto.Password
 
-            if (customer == null)
+            if (customer == null!)
             {
                 return Unauthorized("Invalid email or password.");
             }
-
+            var token = _tokenService.CreateToken(customer.Id.ToString(), customer.Email);
+            
+            
             // Generate JWT or other token in real applications
-            return Ok(new { Message = "Authentication successful." });
+            return Ok(new
+            {
+                Token = token,
+                ExpiresInMinutes = int.Parse(_config["Jwt:ExpiryMinutes"] ?? "60"),
+                HttpResponseMessage = "Authentication Successful"
+            });
+            // return Ok(new { Message = "Authentication successful." });
         }
 
         // Get customer details.

@@ -1,6 +1,11 @@
 using EcommerceAPI.Cache;
 using ECommerceAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using EcommerceAPI.Services;
+
 
 namespace EcommerceAPI
 {
@@ -9,6 +14,8 @@ namespace EcommerceAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var config = builder.Configuration;
+            var keyBytes = Encoding.UTF8.GetBytes(config["Jwt:Key"]);
             //         public static class StringExtensions
             //         {
             //             public static string ToTitleCase(this string input)
@@ -50,12 +57,38 @@ namespace EcommerceAPI
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             //Configure the automapper
             
+            builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme    = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false; // set true in production with HTTPS
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = config["Jwt:Issuer"],
+
+                        ValidateAudience = true,
+                        ValidAudience = config["Jwt:Audience"],
+
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.FromSeconds(30)
+                    };
+                });
+            
             
             // builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Configure EF Core with SQL Server
             builder.Services.AddDbContext<ECommerceDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddSingleton<TokenService>();
             
             var app = builder.Build();
 
