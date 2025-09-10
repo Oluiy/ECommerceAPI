@@ -12,7 +12,7 @@ namespace EcommerceAPI.Services
         public string CreateToken(string userId, string email, IEnumerable<Claim>? extraClaims = null)
         {
             var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
-            var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512);
 
             var claims = new List<Claim>
             {
@@ -27,11 +27,11 @@ namespace EcommerceAPI.Services
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
+                audience: _config.GetValue<string>("Jwt:Audience"),
                 claims: claims,
                 notBefore: DateTime.UtcNow,
                 expires: expires,
-                signingCredentials: creds
+                signingCredentials: credentials
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
