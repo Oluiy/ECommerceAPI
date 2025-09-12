@@ -17,7 +17,7 @@ namespace ECommerceAPI.Data
                 new MembershipTier { Id = 3, TierName = "Bronze", DiscountPercentage = 5.0m },
                 new MembershipTier { Id = 4, TierName = "Standard", DiscountPercentage = 0.0m }
             );
-
+        
             // Seed Customer Data
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
@@ -45,20 +45,20 @@ namespace ECommerceAPI.Data
                     MembershipTierId = 2 // Silver Member
                 }
             );
-
+        
             // Seed Address Data
             modelBuilder.Entity<Address>().HasData(
                 new Address { Id = 1, Street = "123 Main St", City = "Jajpur", ZipCode = "755019", CustomerId = 1 },
                 new Address { Id = 2, Street = "456 Main St", City = "Cuttack", ZipCode = "755123", CustomerId = 2 },
                 new Address { Id = 3, Street = "789 Main St", City = "BBSR", ZipCode = "755456", CustomerId = 1 }
             );
-
+        
             // Seed Category Data
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Electronics", Description = "Electronic Products Description" },
                 new Category { Id = 2, Name = "Accessories", Description = "Accessories Products Description" }
             );
-
+        
             // Seed Product Data
             modelBuilder.Entity<Product>().HasData(
                 new Product { Id = 1, Name = "Laptop", Price = 1500m, Description = "High-performance laptop", SKU = "LPT-100", StockQuantity = 50, CategoryId = 1, DiscountPercentage = 10 },
@@ -66,7 +66,7 @@ namespace ECommerceAPI.Data
                 new Product { Id = 3, Name = "Keyboard", Price = 50m, Description = "Mechanical keyboard", SKU = "KBD-300", StockQuantity = 150, CategoryId = 1, DiscountPercentage = 15 },
                 new Product { Id = 4, Name = "Mobile", Price = 2550m, Description = "iPhone 15 pro", SKU = "MOB-123", StockQuantity = 100, CategoryId = 1, DiscountPercentage = 0 }
             );
-
+        
             // Seed Order Data
             modelBuilder.Entity<Order>().HasData(
                 new Order
@@ -94,7 +94,7 @@ namespace ECommerceAPI.Data
                     TotalAmount = 900m - 135m + 50.0m, // Total after discount and delivery charge
                 }
             );
-
+        
             // Seed OrderItem Data
             modelBuilder.Entity<OrderItem>().HasData(
                 new OrderItem
@@ -128,7 +128,7 @@ namespace ECommerceAPI.Data
                     TotalPrice = (25m * 10) - 12.5m // Total price after discount
                 }
             );
-
+        
             // Seed ShippingDetail Data
             modelBuilder.Entity<TrackingDetail>().HasData(
                 new TrackingDetail { Id = 1, OrderId = 1, Carrier = "FedEx", EstimatedDeliveryDate = new DateTime(2025, 02, 15, 0, 0, 0, DateTimeKind.Utc), TrackingNumber = "123456789" },

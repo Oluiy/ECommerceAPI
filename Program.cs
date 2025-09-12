@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EcommerceAPI.Services;
+using Scalar.AspNetCore;
 
 
 namespace EcommerceAPI
@@ -52,6 +53,7 @@ namespace EcommerceAPI
                 });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
@@ -81,8 +83,7 @@ namespace EcommerceAPI
                         ClockSkew = TimeSpan.FromSeconds(30)
                     };
                 });
-            
-            
+            // builder.Services.AddOpenApi();
             // builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Configure EF Core with SQL Server
@@ -95,6 +96,8 @@ namespace EcommerceAPI
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.MapOpenApi();
+                app.MapScalarApiReference();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }

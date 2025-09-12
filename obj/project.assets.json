@@ -1082,6 +1082,22 @@
           }
         }
       },
+      "Scalar.AspNetCore/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Swashbuckle.AspNetCore/9.0.3": {
         "type": "package",
         "dependencies": {
@@ -3994,6 +4010,23 @@
         "postgresql.png"
       ]
     },
+    "Scalar.AspNetCore/2.0.0": {
+      "sha512": "7o7frlvcpz2qKQGJHP1aS/9vOvEguhEB4mJU3O8VqBuDOu5VGncgfxkhnsOIA0jOKTTe2Apy8zu24L8ShM8j9A==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.0.0.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/9.0.3": {
       "sha512": "Akk4oFgy0ST8Q8pZTfPbrt045tWNyMMiKhlbYjG3qnjQZLz645IL5vhQm7NLicc2sAAQ+vftArIlsYWFevmb2g==",
       "type": "package",
@@ -5097,6 +5130,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.3",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.3",
+      "Scalar.AspNetCore >= 2.0.0",
       "Swashbuckle.AspNetCore >= 9.0.3",
       "Swashbuckle.AspNetCore.Swagger >= 9.0.3"
     ]
@@ -5171,6 +5205,10 @@
             "target": "Package",
             "version": "[9.0.3, )"
           },
+          "Scalar.AspNetCore": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[9.0.3, )"
@@ -5202,5 +5240,13 @@
         "runtimeIdentifierGraphPath": "/Users/israel/.dotnet/sdk/9.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+    }
+  ]
 }

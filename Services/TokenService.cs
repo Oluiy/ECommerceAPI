@@ -1,6 +1,16 @@
+// using System.IdentityModel.Tokens.Jwt;
+// using System.Security.Claims;
+// using Microsoft.IdentityModel.Tokens;
+// using System.Text;
+// using JWTAuthServer.Data;
+// using JWTAuthServer.DTOs;
+// using JWTAuthServer.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace EcommerceAPI.Services
@@ -35,6 +45,14 @@ namespace EcommerceAPI.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string RefreshToken()
+        {
+            var randomByte = new byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomByte);
+            return Convert.ToBase64String(randomByte);
         }
     }
 }

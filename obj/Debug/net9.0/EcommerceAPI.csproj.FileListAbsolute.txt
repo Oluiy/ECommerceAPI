@@ -160,7 +160,6 @@
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/staticwebassets.build.json.cache
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/staticwebassets.development.json
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/staticwebassets.build.endpoints.json
-/Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/Ecommerc.C58B2BB1.Up2Date
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/EcommerceAPI.dll
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/refint/EcommerceAPI.dll
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/EcommerceAPI.pdb
@@ -170,3 +169,5 @@
 /Users/israel/RiderProjects/EcommerceAPI/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/EcommerceAPI.sourcelink.json
 /Users/israel/RiderProjects/EcommerceAPI/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/israel/RiderProjects/EcommerceAPI/bin/Debug/net9.0/Scalar.AspNetCore.dll
+/Users/israel/RiderProjects/EcommerceAPI/obj/Debug/net9.0/Ecommerc.C58B2BB1.Up2Date

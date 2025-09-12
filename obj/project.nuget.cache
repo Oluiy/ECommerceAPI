@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZNX0BtYnQXE=",
+  "dgSpecHash": "a7JEtqfgOt4=",
   "success": true,
   "projectFilePath": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
   "expectedPackageFiles": [
@@ -55,6 +55,7 @@
     "/Users/israel/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/israel/.nuget/packages/npgsql/9.0.2/npgsql.9.0.2.nupkg.sha512",
     "/Users/israel/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.3/npgsql.entityframeworkcore.postgresql.9.0.3.nupkg.sha512",
+    "/Users/israel/.nuget/packages/scalar.aspnetcore/2.0.0/scalar.aspnetcore.2.0.0.nupkg.sha512",
     "/Users/israel/.nuget/packages/swashbuckle.aspnetcore/9.0.3/swashbuckle.aspnetcore.9.0.3.nupkg.sha512",
     "/Users/israel/.nuget/packages/swashbuckle.aspnetcore.swagger/9.0.3/swashbuckle.aspnetcore.swagger.9.0.3.nupkg.sha512",
     "/Users/israel/.nuget/packages/swashbuckle.aspnetcore.swaggergen/9.0.3/swashbuckle.aspnetcore.swaggergen.9.0.3.nupkg.sha512",
@@ -92,5 +93,15 @@
     "/Users/israel/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/israel/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

@@ -68,8 +68,10 @@ namespace EcommerceAPI.Controllers
                 var response = new
                 {
                     Token = token,
+                    RefreshToken = _tokenService.RefreshToken(),
                     Expiring = int.Parse(_config["Jwt:ExpiryMinutes"] ?? "60"),
                     registeredCustomer = _mapper.Map<Customer>(customer)
+                    
                 };
                 
                 return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, response);
