@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
-        "projectName": "EcommerceAPI",
+        "projectName": "ECommerceAPI",
         "projectPath": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
         "packagesPath": "/Users/israel/.nuget/packages/",
         "outputPath": "/Users/israel/RiderProjects/EcommerceAPI/obj/",

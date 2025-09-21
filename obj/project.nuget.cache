@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a7JEtqfgOt4=",
+  "dgSpecHash": "i2UvwTyC8CM=",
   "success": true,
-  "projectFilePath": "/Users/israel/RiderProjects/EcommerceAPI/EcommerceAPI.csproj",
+  "projectFilePath": "/Users/israel/RiderProjects/EcommerceAPI/ECommerceAPI.csproj",
   "expectedPackageFiles": [
     "/Users/israel/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/israel/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
